@@ -16,12 +16,15 @@ interface Post {
   comments: number
 }
 
-const PostFeed = () => {
-  const [posts, setPosts] = useState<Post[]>([])
+interface PostFeedProps {
+  postsToSee: string
+}
 
+const PostFeed: React.FC<PostFeedProps> = ({ postsToSee }) => {
+  const [posts, setPosts] = useState<Post[]>([])
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/posts") // Call your GET API route
+      const response = await fetch(`/api/posts?type=${postsToSee}`) 
       if (response.ok) {
         const data: Post[] = await response.json()
         setPosts(data.reverse())
@@ -30,7 +33,7 @@ const PostFeed = () => {
       }
     }
     fetchPosts()
-  }, []) // Empty dependency array means this runs once on mount
+  }, [postsToSee]) 
   return (
     <div className="flex flex-col justify-center items-center gap-5">
       <div className="text-3xl font-bold">Posts</div>

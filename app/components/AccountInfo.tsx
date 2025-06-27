@@ -57,7 +57,19 @@ const AccountInfo = () => {
           placeholder={user?.lastName}
         ></input>
       </div>
-      <button className="bg-gray-100 p-2 hover:cursor-pointer hover:bg-gray-200">
+      <button
+        onClick={async () => {
+          await fetch("/api/updateAccount", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ firstName, lastName }),
+          })
+          alert("Reload to see the changes!")
+        }}
+        className="bg-gray-100 p-2 hover:cursor-pointer hover:bg-gray-200"
+      >
         Click here to submit changes!
       </button>
     </div>

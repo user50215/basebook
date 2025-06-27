@@ -8,7 +8,7 @@ export default function Home() {
       <Header></Header>
       <div className="center-menu flex flex-col items-center justify-center gap-15 mt-20">
         <CreatePost></CreatePost>
-        <PostFeed></PostFeed>
+        <PostFeed postsToSee="following"></PostFeed>
       </div>
     </div>
   )
